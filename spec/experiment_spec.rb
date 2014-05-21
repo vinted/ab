@@ -2,19 +2,28 @@ require 'spec_helper'
 
 describe Experiment do
   let(:experiment) { Experiment.new(config, id) }
+  let(:config) {
+    {
+      'name' => name,
+      'start_at' => start_at,
+      'end_at' => end_at,
+      'buckets' => buckets,
+      'seed' => seed,
+      'variants' => variants
+    }
+  }
   let(:id) { 1 }
+  let(:name) { 'feed' }
+  let(:start_at) { DateTime.now.prev_year.to_s }
+  let(:end_at) { DateTime.now.next_year.to_s }
+  let(:seed) { 'cccc8888' }
+  let(:buckets) { 'all' }
 
   describe '#variant' do
     subject { experiment.variant }
 
     context 'single variant' do
-      let(:config) {
-        {
-          'name' => 'feed',
-          'buckets' => 'all',
-          'variants' => [{ 'name' => 'enabled', 'chance_weight' => chance_weight }]
-        }
-      }
+      let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => chance_weight }] }
 
       context 'that is turned off' do
         let(:chance_weight) { 0 }
@@ -33,13 +42,8 @@ describe Experiment do
     end
 
     context 'single variant with buckets' do
-      let(:config) {
-        {
-          'name' => 'feed',
-          'buckets' => [1, 2, 3],
-          'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
-        }
-      }
+      let(:buckets) { [1, 2, 3] }
+      let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }
 
       context 'id that is not part of experiment' do
         let(:id) { 1 }
@@ -52,17 +56,27 @@ describe Experiment do
       end
     end
 
+    context 'experiment that has not started yet' do
+      let(:start_at) { DateTime.now.next_year.to_s }
+      let(:buckets) { [1, 2, 3] }
+      let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }
+      it { should be_nil }
+    end
+
+    context 'experiment that has already ended' do
+      let(:end_at) { DateTime.now.prev_year.to_s }
+      let(:buckets) { [1, 2, 3] }
+      let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }
+      it { should be_nil }
+    end
+
     context 'two variants' do
-      let(:config) {
-        {
-          'name' => 'button',
-          'buckets' => 'all',
-          'seed' => 'cccc8888',
-          'variants' => [
-            { 'name' => 'red', 'chance_weight' => 1 },
-            { 'name' => 'blue', 'chance_weight' => 1 }
-          ]
-        }
+      let(:name) { 'button' }
+      let(:variants) {
+        [
+          { 'name' => 'red', 'chance_weight' => 1 },
+          { 'name' => 'blue', 'chance_weight' => 1 }
+        ]
       }
       it { should == 'red' }
     end
