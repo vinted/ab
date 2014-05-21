@@ -1,4 +1,8 @@
 require 'ab/version'
 
-module Ab
+class Ab
+  def initialize(config, id)
+    config.each do |experiment|
+    end
+  end
 end
