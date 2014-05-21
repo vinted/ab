@@ -14,6 +14,7 @@ class Experiment
 
   def variant
     return unless part_of_experiment?
+    return unless running?
 
     result = @config.variants.find { |variant| variant['chance_weight'] > 0 }
     result['name'] if result
@@ -23,6 +24,11 @@ class Experiment
 
   def part_of_experiment?
     @config.buckets == 'all' || @config.buckets.include?(digest % BUCKET_COUNT)
+  end
+
+  def running?
+    now = DateTime.now
+    now.between?(@config.start_at, @config.end_at)
   end
 
   def digest
