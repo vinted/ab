@@ -1,4 +1,5 @@
 require 'ab/version'
+require 'ab/experiment_config'
 require 'ab/experiment'
 
 class Ab
