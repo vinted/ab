@@ -1,4 +1,5 @@
 require 'ab/version'
+require 'ab/variant_config'
 require 'ab/experiment_config'
 require 'ab/experiment'
 
