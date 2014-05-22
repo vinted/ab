@@ -1,12 +1,7 @@
 module Ab
   class AssignedExperiment
-    SALT = 'e131bfcfcab06c65d633d0266c7e62a4918' # should come from config root?
-    BUCKET_COUNT = 1000 # should come from config root?
-
     def initialize(experiment, id)
-      @experiment = Experiment.new(experiment)
-      @id = id
-
+      @experiment, @id = experiment, id
       @experiment.variants.map(&:name).each do |name|
         define_singleton_method("#{name}?") { name == variant }
       end
@@ -27,7 +22,7 @@ module Ab
     end
 
     def bucket_id
-      @bucket_id ||= digest(SALT + @id.to_s) % BUCKET_COUNT
+      @bucket_id ||= digest(@experiment.salt + @id.to_s) % @experiment.bucket_count
     end
 
     def running?
