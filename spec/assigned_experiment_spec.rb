@@ -2,8 +2,9 @@ require 'spec_helper'
 
 module Ab
   describe AssignedExperiment do
-    let(:experiment) { AssignedExperiment.new(config, id) }
-    let(:config) {
+    let(:assigned_experiment) { AssignedExperiment.new(experiment, id) }
+    let(:experiment) { Experiment.new(hash, 'e131bfcfcab06c65d633d0266c7e62a4918', 1000) }
+    let(:hash) {
       {
         'name' => name,
         'start_at' => start_at,
@@ -19,10 +20,10 @@ module Ab
     let(:end_at) { DateTime.now.next_year.to_s }
     let(:seed) { 'cccc8888' }
     let(:buckets) { 'all' }
-    let(:thousand_variants) { 1.upto(1000).map { |i| AssignedExperiment.new(config, i).variant } }
+    let(:thousand_variants) { 1.upto(1000).map { |i| AssignedExperiment.new(experiment, i).variant } }
 
     describe '#variant' do
-      subject { experiment.variant }
+      subject { assigned_experiment.variant }
 
       context 'single variant' do
         let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => chance_weight }] }

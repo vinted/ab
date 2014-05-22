@@ -3,9 +3,10 @@ module Ab
     def initialize(config, id)
       @assigned_experiments ||= {}
 
-      config.each do |experiment|
+      (config['ab_tests'] || []).each do |experiment|
         name = experiment['name']
         define_singleton_method(name) do
+          experiment = Experiment.new(experiment, config['salt'], config['bucket_count'])
           @assigned_experiments[name] ||= AssignedExperiment.new(experiment, id)
         end
       end
