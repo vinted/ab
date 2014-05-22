@@ -1,4 +1,4 @@
-class VariantConfig < Struct.new(:hash, :accumulated_chance_weight)
+class Variant < Struct.new(:hash, :accumulated_chance_weight)
   def chance_weight
     hash['chance_weight']
   end
