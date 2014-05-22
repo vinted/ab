@@ -6,8 +6,7 @@ class Experiment
     @config = ExperimentConfig.new(config)
     @id = id
 
-    @config.variants.each do |variant|
-      name = variant['name']
+    variants.map(&:name).each do |name|
       define_singleton_method("#{name}?") { name == variant }
     end
   end
@@ -16,14 +15,14 @@ class Experiment
     return unless part_of_experiment?
     return unless running?
 
-    result = @config.variants.find { |variant| variant['chance_weight'] > 0 }
-    result['name'] if result
+    result = variants.find { |v| v.accumulated_chance_weight > weight_id }
+    result.name if result
   end
 
   private
 
   def part_of_experiment?
-    @config.buckets == 'all' || @config.buckets.include?(digest % BUCKET_COUNT)
+    @config.buckets == 'all' || @config.buckets.include?(bucket_id)
   end
 
   def running?
@@ -31,11 +30,27 @@ class Experiment
     now.between?(@config.start_at, @config.end_at)
   end
 
-  def digest
-    @digest ||= Digest::SHA256.hexdigest(salted_id).to_i(16)
+  def weight_id
+    @variant_digest ||= digest(@config.seed + @id.to_s) % positive_weight_sum
   end
 
-  def salted_id
-    SALT + @id.to_s
+  def positive_weight_sum
+    weight_sum > 0 ? weight_sum : 1
+  end
+
+  def weight_sum
+    variants.map(&:chance_weight).inject(:+)
+  end
+
+  def bucket_id
+    @bucket_id ||= digest(SALT + @id.to_s) % BUCKET_COUNT
+  end
+
+  def variants
+    @config.variants
+  end
+
+  def digest(string)
+    Digest::SHA256.hexdigest(string).to_i(16)
   end
 end

@@ -18,6 +18,7 @@ describe Experiment do
   let(:end_at) { DateTime.now.next_year.to_s }
   let(:seed) { 'cccc8888' }
   let(:buckets) { 'all' }
+  let(:thousand_variants) { 1.upto(1000).map { |i| Experiment.new(config, i).variant } }
 
   describe '#variant' do
     subject { experiment.variant }
@@ -42,17 +43,12 @@ describe Experiment do
     end
 
     context 'single variant with buckets' do
-      let(:buckets) { [1, 2, 3] }
+      let(:buckets) { (1..100) }
       let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }
 
-      context 'id that is not part of experiment' do
-        let(:id) { 1 }
-        it { should == nil }
-      end
-
-      context 'id that is part of experiment' do
-        let(:id) { 215 }
-        it { should == 'enabled' }
+      specify 'half the ids fall under one, other under other' do
+        enabled = thousand_variants.select { |variant| variant == 'enabled' }
+        enabled.count.should be_within(20).of(100)
       end
     end
 
@@ -78,7 +74,13 @@ describe Experiment do
           { 'name' => 'blue', 'chance_weight' => 1 }
         ]
       }
-      it { should == 'red' }
+
+      specify 'half the ids fall under one, other under other' do
+        reds = thousand_variants.select { |variant| variant == 'red' }
+        blues = thousand_variants.select { |variant| variant == 'blue' }
+        reds.count.should be_within(20).of(500)
+        blues.count.should be_within(20).of(500)
+      end
     end
   end
 end
