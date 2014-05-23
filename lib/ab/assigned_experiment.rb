@@ -1,5 +1,8 @@
 module Ab
   class AssignedExperiment
+    include Hooks
+    define_hooks :before_picking_variant, :after_picking_variant
+
     def initialize(experiment, id)
       @experiment, @id = experiment, id
       @experiment.variants.map(&:name).each do |name|
@@ -8,11 +11,16 @@ module Ab
     end
 
     def variant
-      return unless part_of_experiment?
-      return unless running?
+      @variant ||= begin
+        return unless part_of_experiment?
+        return unless running?
 
-      result = @experiment.variants.find { |v| v.accumulated_chance_weight > weight_id }
-      result.name if result
+        run_hook :before_picking_variant
+        result = @experiment.variants.find { |v| v.accumulated_chance_weight > weight_id }
+        run_hook :after_picking_variant
+
+        result.name if result
+      end
     end
 
     private

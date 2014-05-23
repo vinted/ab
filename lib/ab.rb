@@ -1,3 +1,4 @@
+require 'hooks'
 require 'ab/version'
 require 'ab/null_experiment'
 require 'ab/experiments'
