@@ -85,8 +85,8 @@ configuration = retrieve_from_svc_abs
 ab = Ab::Experiments.new(configuration, user_id)
 
 # defining callbacks
-Ab::Experiments.before_picking_variant { puts 'magic' }
-Ab::Experiments.after_picking_variant { |variant_name| puts "#{variant_name}" }
+Ab::Experiments.before_picking_variant { |experiment| puts 'magic' }
+Ab::Experiments.after_picking_variant { |experiment, variant| puts "#{variant_name}" }
 
 # ab.experiment never returns nil
 # but if you don't belong to any of the buckets, variant will be nil
