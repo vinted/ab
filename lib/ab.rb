@@ -1,5 +1,6 @@
 require 'ab/version'
-require 'ab/test'
+require 'ab/null_experiment'
+require 'ab/experiments'
 require 'ab/assigned_experiment'
 require 'ab/experiment'
 require 'ab/variant'

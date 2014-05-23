@@ -82,7 +82,7 @@ For this lib to work, it requires a configuration json, which looks like this:
 
 ```ruby
 configuration = retrieve_from_svc_abs
-ab = Ab::Test.new(configuration, user_id)
+ab = Ab::Experiments.new(configuration, user_id)
 
 # ab.experiment never returns nil
 # but if you don't belong to any of the buckets, variant will be nil
