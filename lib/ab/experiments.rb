@@ -1,5 +1,5 @@
 module Ab
-  class Test
+  class Experiments
     def initialize(config, id)
       @assigned_experiments ||= {}
 
@@ -10,6 +10,14 @@ module Ab
           @assigned_experiments[name] ||= AssignedExperiment.new(experiment, id)
         end
       end
+    end
+
+    def method_missing(meth, *args, &block)
+      @null_experiment ||= NullExperiment.new
+    end
+
+    def respond_to?(meth)
+      true
     end
   end
 end

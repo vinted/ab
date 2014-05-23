@@ -1,15 +1,20 @@
 require 'spec_helper'
 
 module Ab
-  describe Test do
+  describe Experiments do
     describe '.new' do
-      subject { Test.new(config, id) }
+      subject { Experiments.new(config, id) }
       let(:id) { 1 }
 
       context 'empty config' do
         let(:config) { {} }
+
         specify 'has no public methods' do
-          subject.public_methods(false).count.should == 0
+          (subject.public_methods(false) - [:method_missing, :respond_to?]).count.should == 0
+        end
+
+        specify 'does not raise if method is not existant' do
+          expect{ subject.bla_bla_bla }.to_not raise_error
         end
       end
 
