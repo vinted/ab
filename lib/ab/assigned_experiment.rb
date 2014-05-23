@@ -16,10 +16,11 @@ module Ab
         return unless running?
 
         run_hook :before_picking_variant
-        result = @experiment.variants.find { |v| v.accumulated_chance_weight > weight_id }
-        run_hook :after_picking_variant
+        picked_variant = @experiment.variants.find { |v| v.accumulated_chance_weight > weight_id }
 
-        result.name if result
+        result = picked_variant.name if picked_variant
+        run_hook :after_picking_variant, result
+        result
       end
     end
 

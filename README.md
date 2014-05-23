@@ -84,12 +84,16 @@ For this lib to work, it requires a configuration json, which looks like this:
 configuration = retrieve_from_svc_abs
 ab = Ab::Experiments.new(configuration, user_id)
 
+# defining callbacks
+Ab::Experiments.before_picking_variant { puts 'magic' }
+Ab::Experiments.after_picking_variant { |variant_name| puts "#{variant_name}" }
+
 # ab.experiment never returns nil
 # but if you don't belong to any of the buckets, variant will be nil
 case ab.experiment.variant
-when :red_button
+when 'red_button'
   red_button
-when :green_button
+when 'green_button'
   green_button
 else
   blue_button
