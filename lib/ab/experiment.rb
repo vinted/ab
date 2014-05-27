@@ -26,7 +26,7 @@ module Ab
     end
 
     def end_at
-      @end_at ||= hash['end_at'].nil? ? DateTime.now.next_year : DateTime.parse(hash['end_at'])
+      @end_at ||= hash['end_at'].nil? ? DateTime.new(3000) : DateTime.parse(hash['end_at'])
     end
 
     def weight_sum
