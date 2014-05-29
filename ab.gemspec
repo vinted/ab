@@ -19,8 +19,8 @@ Gem::Specification.new do |spec|
   spec.test_files = `git ls-files -- {spec}/*`.split("\n")
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'hooks', '~> 0.4.0'
+  spec.add_runtime_dependency 'hooks', '~> 0.4', '>= 0.4.0'
   spec.add_development_dependency 'bundler', '~> 1.3'
-  spec.add_development_dependency 'rake', '~> 10.1.0'
-  spec.add_development_dependency 'rspec', '~> 2.14.0'
+  spec.add_development_dependency 'rake', '~> 10.1', '>= 10.1.0'
+  spec.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.0'
 end
