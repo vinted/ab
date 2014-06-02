@@ -40,7 +40,7 @@ module Ab
     end
 
     def weight_id
-      @variant_digest ||= digest(@experiment.seed + @id.to_s) % positive_weight_sum
+      @variant_digest ||= digest("#{@experiment.seed}#{@id}") % positive_weight_sum
     end
 
     def positive_weight_sum
