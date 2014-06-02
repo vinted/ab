@@ -10,7 +10,7 @@ module Ab
         let(:config) { {} }
 
         specify 'has no public methods' do
-          (subject.public_methods(false) - [:method_missing, :respond_to?]).count.should == 0
+          (subject.public_methods(false) - [:method_missing, :respond_to?, :all]).count.should == 0
         end
 
         specify 'does not raise if method is not existant' do
@@ -25,11 +25,13 @@ module Ab
             'bucket_count' => 1000,
             'ab_tests' => [{
               'name' => 'feed',
+              'buckets' => 'all',
               'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
             }]
           }
         }
         its(:feed) { should be_kind_of AssignedExperiment }
+        its(:all) { should == { 'feed' => 'enabled' } }
       end
     end
   end

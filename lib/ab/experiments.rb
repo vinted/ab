@@ -15,11 +15,19 @@ module Ab
 
       (config['ab_tests'] || []).each do |experiment|
         name = experiment['name']
+        @assigned_experiments[name] = nil
         define_singleton_method(name) do
           experiment = Experiment.new(experiment, config['salt'], config['bucket_count'])
           @assigned_experiments[name] ||= AssignedExperiment.new(experiment, id)
         end
       end
+    end
+
+    def all
+      result = @assigned_experiments.keys.map do |name|
+        [name, send(name).variant]
+      end
+      Hash[result]
     end
 
     def method_missing(meth, *args, &block)

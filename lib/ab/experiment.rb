@@ -22,7 +22,7 @@ module Ab
     end
 
     def start_at
-      @start_at ||= DateTime.parse(hash['start_at'])
+      @start_at ||= hash['start_at'].nil? ? DateTime.new(0) : DateTime.parse(hash['start_at'])
     end
 
     def end_at
