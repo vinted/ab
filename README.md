@@ -73,7 +73,7 @@ For this lib to work, it requires a configuration json, which looks like this:
                     "chance_weight": 1
                 }
             ]
-        },
+        }
     ]
 }
 ```
