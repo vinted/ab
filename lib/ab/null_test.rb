@@ -1,6 +1,5 @@
 class NullTest
   def variant
-    nil
   end
 
   def method_missing(meth, *args, &block)
