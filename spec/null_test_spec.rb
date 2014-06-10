@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 module Ab
-  describe NullExperiment do
-    subject { NullExperiment.new }
+  describe NullTest do
+    subject { NullTest.new }
 
     specify 'does not raise for method ending in question mark' do
       expect{ subject.bla? }.to_not raise_error

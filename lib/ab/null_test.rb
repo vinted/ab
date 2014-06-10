@@ -1,4 +1,4 @@
-class NullExperiment
+class NullTest
   def variant
     nil
   end

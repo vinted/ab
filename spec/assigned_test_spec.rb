@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 module Ab
-  describe AssignedExperiment do
-    let(:assigned_experiment) { AssignedExperiment.new(experiment, id) }
-    let(:experiment) { Experiment.new(hash, 'e131bfcfcab06c65d633d0266c7e62a4918', 1000) }
+  describe AssignedTest do
+    let(:assigned_test) { AssignedTest.new(test, id) }
+    let(:test) { Test.new(hash, 'e131bfcfcab06c65d633d0266c7e62a4918', 1000) }
     let(:hash) {
       {
         'name' => name,
@@ -20,10 +20,10 @@ module Ab
     let(:end_at) { DateTime.now.next_year.to_s }
     let(:seed) { 'cccc8888' }
     let(:buckets) { 'all' }
-    let(:thousand_variants) { 1.upto(1000).map { |i| AssignedExperiment.new(experiment, i).variant } }
+    let(:thousand_variants) { 1.upto(1000).map { |i| AssignedTest.new(test, i).variant } }
 
     describe '#variant' do
-      subject { assigned_experiment.variant }
+      subject { assigned_test.variant }
 
       context 'single variant' do
         let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => chance_weight }] }
@@ -54,14 +54,14 @@ module Ab
         end
       end
 
-      context 'experiment that has not started yet' do
+      context 'test that has not started yet' do
         let(:start_at) { DateTime.now.next_year.to_s }
         let(:buckets) { [1, 2, 3] }
         let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }
         it { should be_nil }
       end
 
-      context 'experiment that has already ended' do
+      context 'test that has already ended' do
         let(:end_at) { DateTime.now.prev_year.to_s }
         let(:buckets) { [1, 2, 3] }
         let(:variants) { [{ 'name' => 'enabled', 'chance_weight' => 1 }] }

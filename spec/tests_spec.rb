@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 module Ab
-  describe Experiments do
+  describe Tests do
     describe '.new' do
-      subject { Experiments.new(config, id) }
+      subject { Tests.new(config, id) }
       let(:id) { 1 }
 
       context 'empty config' do
@@ -30,7 +30,7 @@ module Ab
             }]
           }
         }
-        its(:feed) { should be_kind_of AssignedExperiment }
+        its(:feed) { should be_kind_of AssignedTest }
         its(:all) { should == { 'feed' => 'enabled' } }
       end
     end
