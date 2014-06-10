@@ -1,5 +1,5 @@
 module Ab
-  class Experiment < Struct.new(:hash, :salt, :bucket_count)
+  class Test < Struct.new(:hash, :salt, :bucket_count)
     def buckets
       hash['buckets']
     end
