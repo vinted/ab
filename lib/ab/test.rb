@@ -12,7 +12,7 @@ module Ab
       @variants ||= begin
         accumulated = 0
         hash['variants'].map do |variant_hash|
-          Variant.new(variant_hash, accumulated += variant_hash['chance_weight'] )
+          Variant.new(variant_hash, accumulated += variant_hash['chance_weight'])
         end
       end
     end

@@ -4,7 +4,7 @@ module Ab
   describe AssignedTest do
     let(:assigned_test) { AssignedTest.new(test, id) }
     let(:test) { Test.new(hash, 'e131bfcfcab06c65d633d0266c7e62a4918', 1000) }
-    let(:hash) {
+    let(:hash) do
       {
         'name' => name,
         'start_at' => start_at,
@@ -13,7 +13,7 @@ module Ab
         'seed' => seed,
         'variants' => variants
       }
-    }
+    end
     let(:id) { 1 }
     let(:name) { 'feed' }
     let(:start_at) { DateTime.now.prev_year.to_s }
@@ -70,12 +70,12 @@ module Ab
 
       context 'two variants' do
         let(:name) { 'button' }
-        let(:variants) {
+        let(:variants) do
           [
             { 'name' => 'red', 'chance_weight' => 1 },
             { 'name' => 'blue', 'chance_weight' => 1 }
           ]
-        }
+        end
 
         specify 'half the ids fall under one, other under other' do
           reds = thousand_variants.select { |variant| variant == 'red' }

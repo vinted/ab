@@ -7,7 +7,7 @@ module Ab
     let(:id) { 1 }
 
     shared_context 'simple config with feed' do
-      let(:config) {
+      let(:config) do
         {
           'salt' => 'anything',
           'bucket_count' => 1000,
@@ -17,7 +17,7 @@ module Ab
             'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
           }]
         }
-      }
+      end
     end
 
     describe '#respond_to?' do

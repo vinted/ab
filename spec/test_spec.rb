@@ -18,10 +18,10 @@ module Ab
 
     context '#weight_sum' do
       subject { test.weight_sum }
-      let(:test_hash) {
+      let(:test_hash) do
         { 'variants' => [{ 'chance_weight' => 1 },
                          { 'chance_weight' => 2 }] }
-      }
+      end
       it { should == 3 }
     end
 
