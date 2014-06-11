@@ -31,12 +31,11 @@ module Ab
     end
 
     def bucket_id
-      @bucket_id ||= digest(@test.salt + @id.to_s) % @test.bucket_count
+      @bucket_id ||= digest("#{@test.salt}#{@id}") % @test.bucket_count
     end
 
     def running?
-      now = DateTime.now
-      now.between?(@test.start_at, @test.end_at)
+      DateTime.now.between?(@test.start_at, @test.end_at)
     end
 
     def weight_id
