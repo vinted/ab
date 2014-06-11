@@ -11,23 +11,20 @@ module Ab
     end
 
     def initialize(config, id)
-      @assigned_tests ||= {}
+      salt = config['salt']
+      bucket_count = config['bucket_count']
 
-      (config['ab_tests'] || []).each do |test|
-        name = test['name']
-        @assigned_tests[name] = nil
-        define_singleton_method(name) do
-          test = Test.new(test, config['salt'], config['bucket_count'])
-          @assigned_tests[name] ||= AssignedTest.new(test, id)
-        end
+      tests = (config['ab_tests'] || []).map { |test| Test.new(test, salt, bucket_count) }
+
+      @assigned_tests = tests.map do |test|
+        assigned_test = AssignedTest.new(test, id)
+        define_singleton_method(test.name) { assigned_test }
+        [test.name, assigned_test]
       end
     end
 
     def all
-      result = @assigned_tests.keys.map do |name|
-        [name, send(name).variant]
-      end
-      Hash[result]
+      Hash[@assigned_tests.map { |name, assigned_test| [name, assigned_test.variant] }]
     end
 
     def method_missing(meth, *args, &block)
