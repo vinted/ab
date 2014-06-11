@@ -2,36 +2,62 @@ require 'spec_helper'
 
 module Ab
   describe Tests do
+    let(:tests) { Tests.new(config, id) }
+    let(:config) { {} }
+    let(:id) { 1 }
+
+    shared_context 'simple config with feed' do
+      let(:config) {
+        {
+          'salt' => 'anything',
+          'bucket_count' => 1000,
+          'ab_tests' => [{
+            'name' => 'feed',
+            'buckets' => 'all',
+            'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
+          }]
+        }
+      }
+    end
+
+    describe '#respond_to?' do
+      subject { tests.respond_to?(method_name) }
+
+      1.upto(10).each do |i|
+        context "random method name of #{i} length" do
+          let(:method_name) { SecureRandom.hex(i) }
+          it { should be_true }
+        end
+      end
+    end
+
+    describe '#method_missing' do
+      subject { tests.send(method_name) }
+
+      1.upto(10).each do |i|
+        context "random method name of #{i} length" do
+          let(:method_name) { SecureRandom.hex(i) }
+          it { should be_kind_of(NullTest) }
+        end
+      end
+    end
+
+    describe '#all' do
+      include_context 'simple config with feed'
+      subject { tests.all }
+      it { should == { 'feed' => 'enabled' } }
+    end
+
     describe '.new' do
-      subject { Tests.new(config, id) }
-      let(:id) { 1 }
+      subject { tests }
 
-      context 'empty config' do
-        let(:config) { {} }
-
-        specify 'has no public methods' do
-          (subject.public_methods(false) - [:method_missing, :respond_to?, :all]).count.should == 0
-        end
-
-        specify 'does not raise if method is not existant' do
-          expect{ subject.bla_bla_bla }.to_not raise_error
-        end
+      specify 'has no public methods' do
+        (subject.public_methods(false) - [:method_missing, :respond_to?, :all]).count.should == 0
       end
 
       context 'single experiment with single variant' do
-        let(:config) {
-          {
-            'salt' => 'anything',
-            'bucket_count' => 1000,
-            'ab_tests' => [{
-              'name' => 'feed',
-              'buckets' => 'all',
-              'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
-            }]
-          }
-        }
+        include_context 'simple config with feed'
         its(:feed) { should be_kind_of AssignedTest }
-        its(:all) { should == { 'feed' => 'enabled' } }
       end
     end
   end
