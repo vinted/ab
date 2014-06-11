@@ -16,10 +16,27 @@ module Ab
       it { should == 'test' }
     end
 
+    context '#weight_sum' do
+      subject { test.weight_sum }
+      let(:test_hash) {
+        { 'variants' => [{ 'chance_weight' => 1 },
+                         { 'chance_weight' => 2 }] }
+      }
+      it { should == 3 }
+    end
+
     context '#start_at' do
       subject { test.start_at }
-      let(:test_hash) { { 'start_at' => '2014-05-27T11:56:25+03:00' } }
-      it { should == DateTime.new(2014, 5, 27, 11, 56, 25, '+3') }
+
+      context 'nil' do
+        let(:test_hash) { {} }
+        it { should < DateTime.new(1977) }
+      end
+
+      context 'april fools' do
+        let(:test_hash) { { 'start_at' => '2014-04-01T12:00:00+00:00' } }
+        it { should == DateTime.new(2014, 4, 1, 12) }
+      end
     end
 
     context '#end_at' do
