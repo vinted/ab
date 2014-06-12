@@ -13,7 +13,7 @@ module Ab
     let(:name) { 'feed' }
     let(:start_at) { DateTime.now.prev_year }
     let(:end_at) { DateTime.now.next_year }
-    let(:buckets) { 'all' }
+    let(:buckets) { 1..1000 }
     let(:thousand_variants) { 1.upto(1000).map { |i| AssignedTest.new(test, i).variant } }
 
     describe '#variant' do

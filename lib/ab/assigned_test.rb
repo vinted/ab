@@ -27,7 +27,7 @@ module Ab
     private
 
     def part_of_test?
-      @test.buckets == 'all' || @test.buckets.include?(bucket_id)
+      @test.all_buckets? || @test.buckets.include?(bucket_id)
     end
 
     def bucket_id

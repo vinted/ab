@@ -13,7 +13,7 @@ module Ab
           'bucket_count' => 1000,
           'ab_tests' => [{
             'name' => 'feed',
-            'buckets' => 'all',
+            'all_buckets' => true,
             'variants' => [{ 'name' => 'enabled', 'chance_weight' => 1 }]
           }]
         }

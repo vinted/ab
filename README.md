@@ -66,7 +66,7 @@ For this lib to work, it requires a configuration json, which looks like this:
             "start_at": "1999-03-31T00:00:00+03:00",
             "end_at": "2099-03-31T00:00:00+03:00",
             "seed": "cccc8888",
-            "buckets": "all",
+            "all_buckets": true,
             "variants": [
                 {
                     "name": "enabled",

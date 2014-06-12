@@ -4,6 +4,10 @@ module Ab
       hash['buckets']
     end
 
+    def all_buckets?
+      hash['all_buckets']
+    end
+
     def name
       hash['name']
     end
