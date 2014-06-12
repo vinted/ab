@@ -26,15 +26,22 @@ module Ab
     end
 
     def start_at
-      @start_at ||= hash['start_at'].nil? ? DateTime.new(0) : DateTime.parse(hash['start_at'])
+      @start_at ||= parse_time('start_at', 0)
     end
 
     def end_at
-      @end_at ||= hash['end_at'].nil? ? DateTime.new(3000) : DateTime.parse(hash['end_at'])
+      @end_at ||= parse_time('end_at', 3000)
     end
 
     def weight_sum
       variants.map(&:chance_weight).inject(:+)
+    end
+
+    private
+
+    def parse_time(name, default)
+      value = hash[name]
+      value.nil? ? DateTime.new(default) : DateTime.parse(value)
     end
   end
 end
