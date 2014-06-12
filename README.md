@@ -1,5 +1,9 @@
 # ab
 
+[![Code Climate](https://codeclimate.com/github/vinted/ab.png)](https://codeclimate.com/github/vinted/ab)
+[![Gem Version](https://badge.fury.io/rb/vinted-ab.png)](http://badge.fury.io/rb/vinted-ab)
+[![Dependency Status](https://gemnasium.com/vinted/ab.png)](https://gemnasium.com/vinted/ab)
+
 Determines which ab test and variant identifier belongs to. Read more in the [wiki](https://github.com/vinted/ab/wiki).
 
 ## Usage
