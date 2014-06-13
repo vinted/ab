@@ -10,7 +10,9 @@ module Ab
       Ab::Tests.run_hook :after_picking_variant, test, variant
     end
 
-    def initialize(config, id)
+    def initialize(json, id)
+      config = json.is_a?(Hash) ? json : JSON.parse(json)
+
       salt = config['salt']
       bucket_count = config['bucket_count']
 

@@ -1,0 +1,74 @@
+{
+    "type": "object",
+    "required": true,
+    "properties": {
+        "bucket_count": {
+            "type": "number",
+            "required": true
+        },
+        "salt": {
+            "type": "string",
+            "required": true
+        },
+        "ab_tests": {
+            "type": "array",
+            "required": false,
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "all_buckets": {
+                            "type": "boolean",
+                            "required": false
+                        },
+                        "buckets": {
+                            "type": "array",
+                            "required": false,
+                            "items": {
+                                "type": "number",
+                                "required": false
+                            }
+                        },
+                        "start_at": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "end_at": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "id": {
+                            "type": "number",
+                            "required": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "seed": {
+                            "type": "string",
+                            "required": true
+                        },
+                        "variants": {
+                            "type": "array",
+                            "required": true,
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "chance_weight": {
+                                        "type": "number",
+                                        "required": true
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
