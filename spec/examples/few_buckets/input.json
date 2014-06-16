@@ -1,12 +1,12 @@
 {
-    "salt": "aaaa1111",
-    "bucket_count": 1000,
+    "salt": "61b81d7844c40c4057ebe6fc1a7a4a54",
+    "bucket_count": 10,
     "ab_tests": [
         {
-            "id": 42,
-            "name": "all_buckets",
-            "seed": "bbbb2222",
-            "all_buckets": true,
+            "id": 7,
+            "name": "few_buckets",
+            "seed": "f63eb232778ee3b0ad7b8f515dea18a2",
+            "buckets": [1, 2, 3, 4],
             "variants": [
                 {
                     "name": "green",

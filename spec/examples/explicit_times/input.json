@@ -1,0 +1,20 @@
+{
+    "salt": "26c9eb8052e063c0c90ccfc2b2b8d3f9",
+    "bucket_count": 10,
+    "ab_tests": [
+        {
+            "id": 5,
+            "name": "explicit_times",
+            "seed": "2a14d8c5a30618799547e428dfa4a807",
+            "start_at": "2013-01-01T00:00:00+00:00",
+            "end_at": "2222-02-02T02:02:02+02:00",
+            "all_buckets": true,
+            "variants": [
+                {
+                    "name": "green",
+                    "chance_weight": 1
+                }
+            ]
+        }
+    ]
+}

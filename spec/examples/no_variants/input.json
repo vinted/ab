@@ -1,0 +1,13 @@
+{
+    "salt": "89808d1afb4a334119e6d017289cf46a",
+    "bucket_count": 21,
+    "ab_tests": [
+        {
+            "id": 12,
+            "name": "no_variants",
+            "seed": "6e76ebb941d7e65a59d28071d00e3910",
+            "all_buckets": true,
+            "variants": []
+        }
+    ]
+}

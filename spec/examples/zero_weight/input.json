@@ -1,0 +1,22 @@
+{
+    "salt": "199c13b89551aa4127370496ee557892",
+    "bucket_count": 44,
+    "ab_tests": [
+        {
+            "id": 6,
+            "name": "zero_weights",
+            "seed": "2631740ab92aa67dd64172e4f740896d",
+            "all_buckets": true,
+            "variants": [
+                {
+                    "name": "zero",
+                    "chance_weight": 0
+                },
+                {
+                    "name": "weight",
+                    "chance_weight": 0
+                }
+            ]
+        }
+    ]
+}

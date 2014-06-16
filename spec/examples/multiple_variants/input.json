@@ -1,0 +1,30 @@
+{
+    "salt": "61b81d7844c40c4057ebe6fc1a7a4a54",
+    "bucket_count": 20,
+    "ab_tests": [
+        {
+            "id": 6,
+            "name": "multiple_variants",
+            "seed": "1995f6808c018b6dd91a3bc927fd7e92",
+            "all_buckets": true,
+            "variants": [
+                {
+                    "name": "green",
+                    "chance_weight": 1
+                },
+                {
+                    "name": "red",
+                    "chance_weight": 1
+                },
+                {
+                    "name": "blue",
+                    "chance_weight": 1
+                },
+                {
+                    "name": "orange",
+                    "chance_weight": 1
+                }
+            ]
+        }
+    ]
+}

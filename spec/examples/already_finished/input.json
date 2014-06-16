@@ -1,0 +1,20 @@
+{
+    "salt": "9a38d3194fc4c1b43c500c551d3c80a0",
+    "bucket_count": 4,
+    "ab_tests": [
+        {
+            "id": 2,
+            "name": "already_finished",
+            "seed": "792e3b32a6dd59d3f300b2ac8b4caa09",
+            "start_at": "1605-11-05T00:00:00+01:00",
+            "end_at": "2014-02-01T02:15:00+03:00",
+            "all_buckets": true,
+            "variants": [
+                {
+                    "name": "green",
+                    "chance_weight": 1
+                }
+            ]
+        }
+    ]
+}
