@@ -1,0 +1,17 @@
+{
+    "salt": "dddd4444",
+    "bucket_count": 200,
+    "ab_tests": [
+        {
+            "id": 1,
+            "name": "test",
+            "seed": "cccc3333",
+            "variants": [
+                {
+                    "name": "green",
+                    "chance_weight": 1
+                }
+            ]
+        }
+    ]
+}

@@ -20,7 +20,7 @@ describe 'ab' do
 
         cases.each do |id, variant|
           tests = Ab::Tests.new(input, id)
-          tests.send(output['test']).variant.should == variant
+          tests.send(output['test']).variant.to_s.should == variant
         end
       end
     end
