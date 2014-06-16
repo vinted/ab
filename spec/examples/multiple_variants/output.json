@@ -1,0 +1,9 @@
+{
+    "test": "test",
+    "variants": {
+      "green": [3, 9],
+      "red": [6, 13],
+      "blue": [5, 10],
+      "orange": [4, 11]
+    }
+}
