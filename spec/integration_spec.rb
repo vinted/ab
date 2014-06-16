@@ -5,10 +5,10 @@ describe 'ab' do
   path_to_schema = "#{File.dirname(__FILE__)}/../config.json"
 
   Dir.glob("#{File.dirname(__FILE__)}/examples/**").each do |name|
-    let(:input) { IO.read("#{name}/input.json") }
-    let(:output) { JSON.parse(IO.read("#{name}/output.json")) }
-
     context "#{name} example" do
+      let(:input) { IO.read("#{name}/input.json") }
+      let(:output) { JSON.parse(IO.read("#{name}/output.json")) }
+
       specify 'validates against schema' do
         result = JSON::Validator.validate(path_to_schema, input, version: :draft3)
         result.should be_true
