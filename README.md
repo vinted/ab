@@ -91,7 +91,7 @@ Short explanation for a couple of config parameters:
 
 `ab_tests.variants`: tests can have multiple variants, each with a name and a weight.
 
-More examples can be found in [spec/examples](https://github.com/vinted/ab/tree/master/spec/examples). Those examples are part of the test suite, which is run using [this code](https://github.com/vinted/ab/blob/master/spec/integration_spec.rb). We strongly recommend using those examples if you're reimplementing this library in another language.
+More examples can be found in [spec/examples](https://github.com/vinted/ab/tree/master/spec/examples). Those examples are part of the test suite, which is run using [this code](https://github.com/vinted/ab/blob/master/spec/integration_spec.rb). `input.json` is configuration json and `output.json` gives expectations - which identifiers should fall to which variant. We strongly recommend using those examples if you're reimplementing this library in another language.
 
 ## Algorithm
 
