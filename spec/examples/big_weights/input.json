@@ -4,7 +4,7 @@
     "ab_tests": [
         {
             "id": 11,
-            "name": "test",
+            "name": "big_weights",
             "seed": "5aae80d25c5ba1931cbd1bfabada7628",
             "all_buckets": true,
             "variants": [

@@ -4,7 +4,7 @@
     "ab_tests": [
         {
             "id": 7,
-            "name": "test",
+            "name": "few_buckets",
             "seed": "f63eb232778ee3b0ad7b8f515dea18a2",
             "buckets": [1, 2, 3, 4],
             "variants": [

@@ -4,11 +4,11 @@
     "ab_tests": [
         {
             "id": 1,
-            "name": "test",
+            "name": "no_buckets",
             "seed": "cccc3333",
             "variants": [
                 {
-                    "name": "green",
+                    "name": "nononononononon",
                     "chance_weight": 1
                 }
             ]

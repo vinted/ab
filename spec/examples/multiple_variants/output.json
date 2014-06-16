@@ -1,5 +1,5 @@
 {
-    "test": "test",
+    "test": "multiple_variants",
     "variants": {
       "green": [3, 9],
       "red": [6, 13],
