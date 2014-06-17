@@ -4,9 +4,9 @@
 [![Gem Version](https://badge.fury.io/rb/vinted-ab.png)](http://badge.fury.io/rb/vinted-ab)
 [![Dependency Status](https://gemnasium.com/vinted/ab.png)](https://gemnasium.com/vinted/ab)
 
-vinted-ab is used to determine whether an identifier belongs to a particular ab test and which variant of that ab test. Identifiers will usually represent users, but other scenario are possible. There are two parts to that: [Configuration](#configuration) and [Algorithm](#algorithm).
+If you didn't guess it from the name, this library is meant for ab testing. But it doesn't cover everything associated with it, it lacks configuration and management parts. [vinted/ab](https://github.com/vinted/ab) is only used to determine which variant should be applied for a user. Two inputs are expected - [configuration](#configuration) and identifier. Identifier, at least in Vinted's case, represents users, but other scenarios are certainly possible.
 
-High-level description: Identifiers are divided into some number of buckets, using hashing. Before a test is started, buckets are chosen for that test. That gives the ability to pick the needed level of isolation. Each test also has a seed, which is used to randomise how users are divided among test variants.
+Each identifier is assigned to a bucket, using a hashing function. Buckets can then be assigned to tests. That allows isolation control, when we don't want clashing and creation of biases. Each test also has a seed, which is used to randomise how identifiers are divided among test variants. You can find algorithm description [here](#algorithm) if you want more detail.
 
 ![users](https://cloud.githubusercontent.com/assets/54526/2971326/0535267a-db69-11e3-9878-e2b6a5d5505d.png)
 
@@ -19,8 +19,7 @@ ab = Ab::Tests.new(configuration, identifier)
 Ab::Tests.before_picking_variant { |test| puts "picking variant for #{test}" }
 Ab::Tests.after_picking_variant { |test, variant| puts "#{variant_name}" }
 
-# ab.test never returns nil
-# but if you don't belong to any of the buckets, variant will be nil
+# ab.test never returns nil, but #variant can
 case ab.test.variant
 when 'red_button'
   red_button
@@ -100,12 +99,14 @@ Most of the logic, is in `AssignedTest` class, which can be used as an [example 
 Here's some procedural pseudo code to serve as a reference:
 
 ```pseudo
-bucket_id = SHA256(salt + identifier.to_string).to_integer % bucket_count
+salted_identifier = salt + identifier.to_string
+bucket_id = SHA256.hexdigest(salted_identifier).to_int % bucket_count
 
 return if not (test.all_buckets? or test.buckets.include?(bucket_id))
 return if not DateTime.now.between?(test.start_at, test.end_at)
 
 chance_weight_sum = chance_weight_sum > 0 ? test.chance_weight_sum : 1
-weight_id = SHA256(test.seed + identifier.to_string).to_integer % chance_weight_sum
+seeded_identifier = test.seed + identifier.to_string
+weight_id = SHA256.hexdigest(seeded_identifier).to_int % chance_weight_sum
 test.variants.find { |variant| variant.accumulated_chance_weight > weight_id }
 ```
