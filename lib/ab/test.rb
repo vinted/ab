@@ -21,6 +21,10 @@ module Ab
       end
     end
 
+    def variant_names
+      @variant_names ||= variants.map(&:name)
+    end
+
     def seed
       hash['seed']
     end
