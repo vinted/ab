@@ -31,6 +31,9 @@ end
 
 # calls #variant underneath, results of that call are cached
 puts 'red button' if ab.test.red_button?
+
+# both start_at and end_at dates are accessible
+puts 'newbie button' if user.created_at > ab.test.start_at && ab.test.for_newbies?
 ```
 
 ## Configuration
