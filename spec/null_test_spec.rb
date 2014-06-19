@@ -5,6 +5,8 @@ module Ab
     subject { NullTest.new }
 
     its(:variant) { should be_nil }
+    its(:start_at) { should_not be_nil }
+    its(:end_at) { should_not be_nil }
 
     specify 'does not raise for method ending in question mark' do
       expect { subject.bla? }.to_not raise_error

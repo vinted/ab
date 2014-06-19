@@ -24,6 +24,14 @@ module Ab
       end
     end
 
+    def start_at
+      @test.start_at
+    end
+
+    def end_at
+      @test.end_at
+    end
+
     private
 
     def part_of_test?
