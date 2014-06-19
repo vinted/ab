@@ -12,6 +12,7 @@ module Ab
 
     def variant
       @variant ||= begin
+        return if @id.nil?
         return unless part_of_test?
         return unless running?
 
