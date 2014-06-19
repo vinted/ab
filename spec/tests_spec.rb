@@ -3,7 +3,7 @@ require 'spec_helper'
 module Ab
   describe Tests do
     let(:tests) { Tests.new(config, id) }
-    let(:config) { {} }
+    let(:config) { nil }
     let(:id) { 1 }
 
     shared_context 'simple config with feed' do

@@ -11,6 +11,7 @@ module Ab
     end
 
     def initialize(json, id)
+      json ||= {}
       config = json.is_a?(Hash) ? json : JSON.parse(json)
 
       salt = config['salt']
