@@ -113,3 +113,8 @@ seeded_identifier = test.seed + identifier.to_string
 weight_id = SHA256.hexdigest(seeded_identifier).to_int % chance_weight_sum
 test.variants.find { |variant| variant.accumulated_chance_weight > weight_id }
 ```
+
+## Other Implementations
+
+* [Java](https://github.com/vinted/ab-java) - intended to be used on Android, but not limited to that
+* [Objective-C](https://github.com/vinted/ab-ios) - intended to be used on iOS devices
