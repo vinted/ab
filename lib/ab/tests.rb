@@ -1,13 +1,13 @@
 module Ab
   class Tests
-    include Hooks
-    define_hooks :before_picking_variant, :after_picking_variant
+    class << self
+      def before_picking_variant(&block)
+        AssignedTest.before_picking_variant(&block)
+      end
 
-    Ab::AssignedTest.before_picking_variant do |test|
-      Ab::Tests.run_hook :before_picking_variant, test
-    end
-    Ab::AssignedTest.after_picking_variant do |test, variant|
-      Ab::Tests.run_hook :after_picking_variant, test, variant
+      def after_picking_variant(&block)
+        AssignedTest.after_picking_variant(&block)
+      end
     end
 
     def initialize(json, id)

@@ -15,7 +15,7 @@ Each identifier is assigned to a bucket, using a hashing function. Buckets can t
 ```ruby
 ab = Ab::Tests.new(configuration, identifier)
 
-# defining callbacks
+# defining callbacks, will use caller's context
 Ab::Tests.before_picking_variant { |test| puts "picking variant for #{test}" }
 Ab::Tests.after_picking_variant { |test, variant| puts "#{variant_name}" }
 
