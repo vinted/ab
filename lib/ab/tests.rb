@@ -27,14 +27,15 @@ module Ab
     end
 
     def all
-      Hash[@assigned_tests.map { |name, assigned_test| [name, assigned_test.variant] }]
+      # TODO: temporary feature to support old Vinted ab testing system
+      Hash[@assigned_tests.map { |name, assigned_test| [name, assigned_test.variant(false)] }]
     end
 
-    def method_missing(meth, *args, &block)
+    def method_missing(*)
       @null_test ||= NullTest.new
     end
 
-    def respond_to?(meth)
+    def respond_to?(*)
       true
     end
   end

@@ -18,16 +18,16 @@ module Ab
       end
     end
 
-    def variant
+    def variant(run_callbacks = true)
       @variant ||= begin
         return unless part_of_test?
         return unless running?
 
-        AssignedTest.before.call(@test.name) if AssignedTest.before.respond_to?(:call)
+        AssignedTest.before.call(@test.name) if run_callbacks && AssignedTest.before.respond_to?(:call)
         picked_variant = @test.variants.find { |v| v.accumulated_chance_weight > weight_id }
 
         result = picked_variant.name if picked_variant
-        AssignedTest.after.call(@test.name, result) if AssignedTest.after.respond_to?(:call)
+        AssignedTest.after.call(@test.name, result) if run_callbacks && AssignedTest.after.respond_to?(:call)
         result
       end
     end
