@@ -1,4 +1,3 @@
-require 'hooks'
 require 'ab/version'
 require 'ab/null_test'
 require 'ab/variant'

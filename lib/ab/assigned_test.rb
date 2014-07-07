@@ -1,12 +1,20 @@
 module Ab
   class AssignedTest
-    include Hooks
-    define_hooks :before_picking_variant, :after_picking_variant
-
     def initialize(test, id)
       @test, @id = test, id
       @test.variants.map(&:name).each do |name|
         define_singleton_method("#{name}?") { name == variant }
+      end
+    end
+
+    class << self
+      attr_reader :before, :after
+      def before_picking_variant(&block)
+        @before = block
+      end
+
+      def after_picking_variant(&block)
+        @after = block
       end
     end
 
@@ -15,11 +23,11 @@ module Ab
         return unless part_of_test?
         return unless running?
 
-        run_hook :before_picking_variant, @test.name
+        AssignedTest.before.call(@test.name) if AssignedTest.before.respond_to?(:call)
         picked_variant = @test.variants.find { |v| v.accumulated_chance_weight > weight_id }
 
         result = picked_variant.name if picked_variant
-        run_hook :after_picking_variant, @test.name, result
+        AssignedTest.after.call(@test.name, result) if AssignedTest.after.respond_to?(:call)
         result
       end
     end
