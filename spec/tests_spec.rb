@@ -26,7 +26,7 @@ module Ab
       1.upto(10).each do |i|
         context "random method name of #{i} length" do
           let(:method_name) { SecureRandom.hex(i) }
-          it { should be_true }
+          it { should be true }
         end
       end
     end

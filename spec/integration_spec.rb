@@ -11,7 +11,7 @@ describe 'ab' do
 
       specify 'validates against schema' do
         result = JSON::Validator.validate(path_to_schema, input, version: :draft3)
-        result.should be_true
+        result.should be true
       end
 
       specify 'correctly assigns variants' do
@@ -21,7 +21,7 @@ describe 'ab' do
         cases.each do |id, variant|
           tests = Ab::Tests.new(input, id)
           tests.send(output['test']).variant.to_s.should == variant
-          tests.send(output['test']).send("#{variant}?").should be_true unless variant.empty?
+          tests.send(output['test']).send("#{variant}?").should be true unless variant.empty?
         end
       end
     end
