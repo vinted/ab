@@ -6,8 +6,8 @@
             "id": 2,
             "name": "already_finished",
             "seed": "792e3b32a6dd59d3f300b2ac8b4caa09",
-            "start_at": "1605-11-05T00:00:00+01:00",
-            "end_at": "2014-02-01T02:15:00+03:00",
+            "start_at": "1605-11-05T00:00:00+0100",
+            "end_at": "2014-02-01T02:15:00+0300",
             "all_buckets": true,
             "variants": [
                 {

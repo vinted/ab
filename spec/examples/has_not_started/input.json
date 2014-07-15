@@ -6,7 +6,7 @@
             "id": 2,
             "name": "has_not_started",
             "seed": "2",
-            "start_at": "2444-01-01T00:00:00+00:00",
+            "start_at": "2444-01-01T00:00:00+0000",
             "all_buckets": true,
             "variants": [
                 {
