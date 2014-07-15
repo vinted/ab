@@ -6,8 +6,8 @@
             "id": 5,
             "name": "explicit_times",
             "seed": "2a14d8c5a30618799547e428dfa4a807",
-            "start_at": "2013-01-01T00:00:00+00:00",
-            "end_at": "2222-02-02T02:02:02+02:00",
+            "start_at": "2013-01-01T00:00:00+0000",
+            "end_at": "2222-02-02T02:02:02+0200",
             "all_buckets": true,
             "variants": [
                 {

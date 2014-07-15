@@ -54,8 +54,8 @@ An example config:
         {
             "id": 42,
             "name": "experiment",
-            "start_at": "2014-05-21T11:06:30+03:00",
-            "end_at": "2014-05-28T11:06:30+03:00",
+            "start_at": "2014-05-21T11:06:30+0300",
+            "end_at": "2014-05-28T11:06:30+0300",
             "seed": "aaaa1111",
             "buckets": [1, 2, 3, 4, 5],
             "variants": [
