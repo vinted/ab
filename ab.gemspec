@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'rake', '~> 10.1', '>= 10.1.0'
   spec.add_development_dependency 'rspec', '~> 2.14', '>= 2.14.0'
+  spec.add_development_dependency 'rspec-its', '~> 1.0.1'
   spec.add_development_dependency 'json-schema', '~> 2.2.2', '>= 2.2.2'
   spec.add_development_dependency 'ruby-prof', '~> 0.15.0', '>= 0.15.0'
   spec.add_development_dependency 'pry', '~> 0.10.0', '>= 0.10.0'
