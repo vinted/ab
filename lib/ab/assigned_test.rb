@@ -2,7 +2,7 @@ module Ab
   class AssignedTest
     def initialize(test, id)
       @test, @id = test, id
-      @test.variants.map(&:name).each do |name|
+      variants.each do |name|
         define_singleton_method("#{name}?") { name == variant }
       end
     end
@@ -38,6 +38,10 @@ module Ab
 
     def end_at
       @test.end_at
+    end
+
+    def variants
+      @test.variants.map(&:name)
     end
 
     private
