@@ -27,7 +27,6 @@ module Ab
     end
 
     def all
-      # TODO: temporary feature to support old Vinted ab testing system
       Hash[@assigned_tests.map { |name, assigned_test| [name, assigned_test.variant(false)] }]
     end
 
