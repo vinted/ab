@@ -34,7 +34,7 @@ module Ab
       @null_test ||= NullTest.new
     end
 
-    def respond_to?(*)
+    def respond_to_missing?(*)
       true
     end
   end

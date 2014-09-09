@@ -11,12 +11,11 @@ module Ab
       Test::DEFAULT_END_AT
     end
 
-
     def method_missing(meth, *args, &block)
       meth.to_s.end_with?('?') ? false : super
     end
 
-    def respond_to?(meth)
+    def respond_to_missing?(meth)
       meth.to_s.end_with?('?') ? true : super
     end
   end
