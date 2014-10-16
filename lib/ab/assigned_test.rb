@@ -1,5 +1,7 @@
 module Ab
   class AssignedTest
+    include Ab::MissingVariant
+
     def initialize(test, id)
       @test, @id = test, id
       variants.each do |name|
