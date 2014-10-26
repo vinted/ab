@@ -1,3 +1,5 @@
+require 'securerandom'
+require 'date'
 require 'ab/version'
 require 'ab/null_test'
 require 'ab/variant'
