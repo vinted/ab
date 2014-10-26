@@ -52,7 +52,7 @@ module Ab
       subject { tests }
 
       specify 'has no public methods' do
-        (subject.public_methods(false) - [:method_missing, :respond_to?, :all]).count.should == 0
+        (subject.public_methods(false) - [:method_missing, :respond_to_missing?, :all]).count.should == 0
       end
 
       context 'single experiment with single variant' do
