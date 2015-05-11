@@ -1,6 +1,8 @@
 require 'securerandom'
 require 'date'
+require 'logger'
 require 'ab/version'
+require 'ab/configuration'
 require 'ab/missing_variant'
 require 'ab/null_test'
 require 'ab/variant'
