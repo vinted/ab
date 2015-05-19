@@ -16,6 +16,17 @@ module Ab
     let(:buckets) { 1..1000 }
     let(:thousand_variants) { 1.upto(1000).map { |i| AssignedTest.new(test, i).variant } }
 
+    context 'with non existent variant' do
+      let(:variants) { [OpenStruct.new(name: 'enabled', accumulated_chance_weight: 2)] }
+      let(:message) { '[AB_testing] Checking non-existing variant: disabled?' }
+
+      before { Ab.config.logger.should_receive(:debug).with(message) }
+
+      subject { assigned_test.disabled? }
+
+      it { should be false }
+    end
+
     describe '#variant' do
       subject { assigned_test.variant }
 

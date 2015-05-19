@@ -20,6 +20,11 @@ ab = Ab::Tests.new(configuration, identifier)
 Ab::Tests.before_picking_variant { |test| puts "picking variant for #{test}" }
 Ab::Tests.after_picking_variant { |test, variant| puts "#{variant_name}" }
 
+# by default messages are logged to null logger. Can be changed by setting your own logger:
+Ab.configure do |config|
+  config.logger = Logger.new($stdout)
+end
+
 # ab.test never returns nil, but #variant can
 case ab.test.variant
 when 'red_button'
@@ -32,6 +37,9 @@ end
 
 # calls #variant underneath, results of that call are cached
 puts 'red button' if ab.test.red_button?
+
+# non existant variants return false
+puts 'this will not get printed' if ab.test.there_is_no_button?
 
 # both start_at and end_at dates are accessible
 puts 'newbie button' if user.created_at > ab.test.start_at && ab.test.for_newbies?
