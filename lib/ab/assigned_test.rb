@@ -25,11 +25,11 @@ module Ab
         return unless part_of_test?
         return unless running?
 
-        AssignedTest.before.call(@test.name) if run_callbacks && AssignedTest.before.respond_to?(:call)
+        AssignedTest.before.call(name) if run_callbacks && AssignedTest.before.respond_to?(:call)
         picked_variant = @test.variants.find { |v| v.accumulated_chance_weight > weight_id }
 
         result = picked_variant.name if picked_variant
-        AssignedTest.after.call(@test.name, result) if run_callbacks && AssignedTest.after.respond_to?(:call)
+        AssignedTest.after.call(name, result) if run_callbacks && AssignedTest.after.respond_to?(:call)
         result
       end
     end
@@ -48,6 +48,10 @@ module Ab
 
     private
 
+    def name
+      @test.name
+    end
+
     def part_of_test?
       @test.all_buckets? ||
         @test.buckets && @test.buckets.include?(bucket_id)
@@ -58,7 +62,7 @@ module Ab
     end
 
     def running?
-      DateTime.now.between?(@test.start_at, @test.end_at)
+      DateTime.now.between?(start_at, end_at)
     end
 
     def weight_id
