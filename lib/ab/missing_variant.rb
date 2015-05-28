@@ -22,7 +22,7 @@ module Ab
     def log_missing_variant(meth)
       return unless name
 
-      Ab.config.logger.debug("[AB_testing] Checking non-existing variant: #{meth}")
+      Ab.config.logger.debug("[AB_testing] Checking non-existing variant: #{name}##{meth}")
     end
 
     def name

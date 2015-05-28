@@ -18,7 +18,7 @@ module Ab
 
     context 'with non existent variant' do
       let(:variants) { [OpenStruct.new(name: 'enabled', accumulated_chance_weight: 2)] }
-      let(:message) { '[AB_testing] Checking non-existing variant: disabled?' }
+      let(:message) { '[AB_testing] Checking non-existing variant: feed#disabled?' }
 
       before { Ab.config.logger.should_receive(:debug).with(message) }
 
