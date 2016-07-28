@@ -1,6 +1,6 @@
 module Ab
   class Test < Struct.new(:hash, :salt, :bucket_count)
-    DEFAULT_START_AT =  DateTime.new(0)
+    DEFAULT_START_AT = DateTime.new(0)
     DEFAULT_END_AT = DateTime.new(3000)
 
     def buckets

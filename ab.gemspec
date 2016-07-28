@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.required_rubygems_version = '>= 1.3.6'
   spec.license = 'MIT'
 
-  spec.files = `git ls-files`.split($/)
+  spec.files = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   spec.test_files = `git ls-files -- {spec}/*`.split("\n")
   spec.require_paths = ['lib']
 

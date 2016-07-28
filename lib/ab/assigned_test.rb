@@ -3,7 +3,8 @@ module Ab
     include Ab::MissingVariant
 
     def initialize(test, id)
-      @test, @id = test, id
+      @test = test
+      @id = id
       variants.each do |name|
         define_singleton_method("#{name}?") { name == variant }
       end
