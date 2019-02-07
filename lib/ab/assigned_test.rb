@@ -5,9 +5,6 @@ module Ab
     def initialize(test, id)
       @test = test
       @id = id
-      variants.each do |name|
-        define_singleton_method("#{name}?") { name == variant }
-      end
     end
 
     class << self
@@ -19,6 +16,12 @@ module Ab
       def after_picking_variant(&block)
         @after = block
       end
+    end
+
+    def method_missing(name, *args, &block)
+      variant_query = name.to_s[0..-2]
+      return variant == variant_query if variant_method?(name) && variants.include?(variant_query)
+      super
     end
 
     def variant(run_callbacks = true)
